@@ -56,6 +56,11 @@ public:
     {
         // Run the Kaa endpoint.
         kaaClient_->start();
+        // Read default sample period
+        samplePeriod_ = kaaClient_->getConfiguration().samplePeriod;
+        std::cout << "Set default sample period: " << samplePeriod_<< std::endl;
+        // Set default sample period
+        timer_.expires_from_now(boost::posix_time::seconds(samplePeriod_));
         service_.run();
     }
     
